@@ -40,20 +40,27 @@ class mainMethods:
 
     def lemmatiseCompTerms(self, text):
         sentArray = []
+        # make sure that terms are present
         try:
+            # split input text into array
             terms = text.split("\n")
-
+            # loop over terms
             for term in terms:
+                # phrases to be reduced to terms for lemmatising
                 term = term.split()
+                # ensure no blank strings
                 if len(term) > 0:
+                    # singletons
                     if len(term) == 1:
                         term = nlpMethods.lemmatise_corpus(self, term[0].lower())
                         sentArray.append(term)
-                    # phrase
+                    # phrases
                     else:
                         termArray = []
+                        # lemmatise each word in phrase
                         for t in term:
                             termArray.append(nlpMethods.lemmatise_corpus(self, t.lower()))
+                        #remake phrase 
                         term = " ".join(termArray)
                         sentArray.append(term)
         except:
